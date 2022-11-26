@@ -7,6 +7,8 @@
 
 import Foundation
 
+// o Coordinator é o responsável por navegar
+
 public protocol Coordinator: AnyObject {
    func start()
 }

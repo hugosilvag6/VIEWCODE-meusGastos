@@ -7,11 +7,20 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: ViewControllerDefault {
+   
+   var onRegisterTap: (() -> Void)?
+   var onLoginTap: (() -> Void)?
    
    lazy var loginView: LoginView = {
       let view = LoginView()
       view.backgroundColor = .white
+      view.onRegisterTap = {
+         self.onRegisterTap?()
+      }
+      view.onLoginTap = {
+         self.onLoginTap?()
+      }
       return view
    }()
    

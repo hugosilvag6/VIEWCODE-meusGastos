@@ -1,24 +1,23 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  MeusGastos
 //
-//  Created by Hugo Silva on 24/11/22.
+//  Created by Hugo Silva on 25/11/22.
 //
 
 import UIKit
 
-class LoginView: UIView {
-   var onRegisterTap: (() -> Void)?
+class RegisterView: UIView {
    var onLoginTap: (() -> Void)?
    // MARK: LabelsDefault
-   let titleLabel = LabelDefault(text: "Login", font: .systemFont(ofSize: 25, weight: .semibold))
+   let titleLabel = LabelDefault(text: "Cadastro de usuário", font: .systemFont(ofSize: 25, weight: .semibold))
    let emailLabel = LabelDefault(text: "Email")
    let passwordLabel = LabelDefault(text: "Senha")
    
    // MARK: TextfieldsDefault
    let emailTextfield = TextfieldDefault(placeholder: "Informe seu email", keyboardType: .emailAddress)
    let passwordTextfield = TextfieldDefault(placeholder: "Informe sua senha", isSecureTextEntry: true)
-
+   
    // MARK: ButtonDefault
    let buttonLogin = ButtonDefault(title: "Entrar")
    let buttonRegister = ButtonDefault(title: "Registrar")
@@ -35,8 +34,8 @@ class LoginView: UIView {
       setTitle()
       setEmail()
       setPassword()
-      setButtonLogin()
       setButtonRegister()
+      setButtonLogin()
    }
    private func setTitle() {
       self.addSubview(self.titleLabel)
@@ -74,30 +73,26 @@ class LoginView: UIView {
          passwordTextfield.heightAnchor.constraint(equalToConstant: 40)
       ])
    }
-   private func setButtonLogin() {
-      self.addSubview(self.buttonLogin)
-      self.buttonLogin.addTarget(self, action: #selector(buttonLoginTap), for: .touchUpInside)
-      NSLayoutConstraint.activate([
-         buttonLogin.topAnchor.constraint(equalTo: passwordTextfield.bottomAnchor, constant: 30),
-         buttonLogin.leftAnchor.constraint(equalTo: self.titleLabel.leftAnchor),
-         buttonLogin.rightAnchor.constraint(equalTo: self.titleLabel.rightAnchor),
-         buttonLogin.heightAnchor.constraint(equalToConstant: 40)
-      ])
-   }
    private func setButtonRegister() {
       self.addSubview(self.buttonRegister)
-      self.buttonRegister.addTarget(self, action: #selector(buttonRegisterTap), for: .touchUpInside)
       NSLayoutConstraint.activate([
-         buttonRegister.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 30),
+         buttonRegister.topAnchor.constraint(equalTo: self.passwordTextfield.bottomAnchor, constant: 30),
          buttonRegister.leftAnchor.constraint(equalTo: self.titleLabel.leftAnchor),
          buttonRegister.rightAnchor.constraint(equalTo: self.titleLabel.rightAnchor),
          buttonRegister.heightAnchor.constraint(equalToConstant: 40)
       ])
    }
-   @objc func buttonRegisterTap() {
-      self.onRegisterTap?()
+   private func setButtonLogin() {
+      self.addSubview(self.buttonLogin)
+      self.buttonLogin.addTarget(self, action: #selector(buttonLoginTap), for: .touchUpInside)
+      NSLayoutConstraint.activate([
+         buttonLogin.topAnchor.constraint(equalTo: self.buttonRegister.bottomAnchor, constant: 30),
+         buttonLogin.leftAnchor.constraint(equalTo: self.titleLabel.leftAnchor),
+         buttonLogin.rightAnchor.constraint(equalTo: self.titleLabel.rightAnchor),
+         buttonLogin.heightAnchor.constraint(equalToConstant: 40)
+      ])
    }
-   @objc func buttonLoginTap() {
+   @objc func buttonLoginTap(){
       self.onLoginTap?()
    }
 }
